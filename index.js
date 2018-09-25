@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 require('./models/Usuario');
+require('./models/Dependiente');
 
 // mongoose.connect(keys.mongoRed);
 
@@ -19,6 +20,7 @@ const escogerBdd = (equipo) => {
 };
 
 require('./routes/usuariosRoutes')(app, escogerBdd);
+require('./routes/dependientesRoutes')(app, escogerBdd);
 
 
 const PORT = process.env.PORT || 5000;

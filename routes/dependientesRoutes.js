@@ -23,6 +23,15 @@ module.exports = (app, escogerBdd) => {
 
 //=========================================================================
 
+	app.get('/api/dependientes_usuario/:equipo/:id', async (req, res) => {
+		await escogerBdd(req.params.equipo);
+
+		const dependientes = await Dependiente.find({ _usuario: req.params.id });
+		res.send(dependientes);
+	});
+
+//=========================================================================
+
 	app.post('/api/dependientes/:equipo', async (req, res) => {
 		await escogerBdd(req.params.equipo);
 
