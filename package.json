@@ -1,0 +1,27 @@
+{
+  "name": "ch2server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bedu2/CH2Server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bedu2/CH2Server/issues"
+  },
+  "homepage": "https://github.com/Bedu2/CH2Server#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.2.17",
+    "nodemon": "^1.18.3"
+  }
+}
