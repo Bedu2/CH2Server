@@ -25,8 +25,8 @@ const escogerBdd = (equipo) => {
 	}
 };
 
-require('./routes/usuariosRoutes')(app, escogerBdd, aceptarCors);
 require('./routes/dependientesRoutes')(app, escogerBdd, aceptarCors);
+require('./routes/usuariosRoutes')(app, escogerBdd, aceptarCors);
 
 
 const PORT = process.env.PORT || 5000;
