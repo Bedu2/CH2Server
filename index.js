@@ -8,15 +8,15 @@ require('./models/Dependiente');
 // mongoose.connect(keys.mongoRed);
 
 const app = express();
+app.use(bodyParser.json());
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
 
 const escogerBdd = (equipo) => {
-	app.use(bodyParser.json());
-	app.use((req, res, next) => {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		next();
-	});
 	switch (equipo) {
 		case 'red': return mongoose.connect(keys.mongoRed);
 		case 'green': return mongoose.connect(keys.mongoGreen);
