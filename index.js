@@ -10,7 +10,7 @@ require('./models/Dependiente');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors({origin: '*'}));
+app.use(cors({origin: 'null'}));
 
 const escogerBdd = (equipo) => {
 	switch (equipo) {
