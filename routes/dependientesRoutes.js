@@ -34,6 +34,9 @@ module.exports = (app, escogerBdd) => {
 
 	app.post('/api/dependientes/:equipo', async (req, res) => {
 		await escogerBdd(req.params.equipo);
+		res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
 
 		const { nombre_completo, edad, _usuario, dependencia } = req.body;
 
