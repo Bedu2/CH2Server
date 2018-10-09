@@ -15,7 +15,7 @@ const aceptarCors = (req, res, next) => {
 	next();
 }
 app.use(bodyParser.json());
-app.use(aceptarCors());
+app.use(aceptarCors);
 
 const escogerBdd = (equipo) => {
 	switch (equipo) {
