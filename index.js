@@ -8,13 +8,14 @@ require('./models/Dependiente');
 // mongoose.connect(keys.mongoRed);
 
 const app = express();
-app.use(bodyParser.json());
-app.use(function (req, res, next) {
-	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+const aceptarCors = (req, res, next) => {
+	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+	res.setHeader('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept");
 	next();
-});
+}
+app.use(bodyParser.json());
+app.use(aceptarCors());
 
 const escogerBdd = (equipo) => {
 	switch (equipo) {
@@ -24,8 +25,8 @@ const escogerBdd = (equipo) => {
 	}
 };
 
-require('./routes/usuariosRoutes')(app, escogerBdd);
-require('./routes/dependientesRoutes')(app, escogerBdd);
+require('./routes/usuariosRoutes')(app, escogerBdd, aceptarCors);
+require('./routes/dependientesRoutes')(app, escogerBdd, aceptarCors);
 
 
 const PORT = process.env.PORT || 5000;
