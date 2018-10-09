@@ -5,7 +5,7 @@ const Dependiente = mongoose.model('dependientes');
 
 module.exports = (app, escogerBdd, aceptarCors) => {
 
-	app.get('/api/dependientes/:equipo', aceptarCors async (req, res) => {
+	app.get('/api/dependientes/:equipo', aceptarCors, async (req, res) => {
 		await escogerBdd(req.params.equipo);
 
 		const dependientes = await Dependiente.find({});
@@ -14,7 +14,7 @@ module.exports = (app, escogerBdd, aceptarCors) => {
 
 //=========================================================================
 
-	app.get('/api/dependientes/:equipo/:id', aceptarCors async (req, res) => {
+	app.get('/api/dependientes/:equipo/:id', aceptarCors, async (req, res) => {
 		await escogerBdd(req.params.equipo);
 
 		const dependientes = await Dependiente.find({ _id: req.params.id });
@@ -23,7 +23,7 @@ module.exports = (app, escogerBdd, aceptarCors) => {
 
 //=========================================================================
 
-	app.get('/api/dependientes_usuario/:equipo/:id', aceptarCors async (req, res) => {
+	app.get('/api/dependientes_usuario/:equipo/:id', aceptarCors, async (req, res) => {
 		await escogerBdd(req.params.equipo);
 
 		const dependientes = await Dependiente.find({ _usuario: req.params.id });
@@ -32,7 +32,7 @@ module.exports = (app, escogerBdd, aceptarCors) => {
 
 //=========================================================================
 
-	app.post('/api/dependientes/:equipo', aceptarCors async (req, res) => {
+	app.post('/api/dependientes/:equipo', aceptarCors, async (req, res) => {
 		await escogerBdd(req.params.equipo);
 
 		const { nombre_completo, edad, _usuario, dependencia } = req.body;
@@ -52,7 +52,7 @@ module.exports = (app, escogerBdd, aceptarCors) => {
 
 //=========================================================================
 
-	app.post('/api/dependientes/:equipo/:id', aceptarCors async (req, res) => {
+	app.post('/api/dependientes/:equipo/:id', aceptarCors, async (req, res) => {
 		await escogerBdd(req.params.equipo);
 
 		const { nombre_completo, edad, _usuario, dependencia } = req.body;
@@ -73,7 +73,7 @@ module.exports = (app, escogerBdd, aceptarCors) => {
 
 //=========================================================================
 
-	app.delete('/api/dependientes/:equipo/:id', aceptarCors async (req, res) => {
+	app.delete('/api/dependientes/:equipo/:id', aceptarCors, async (req, res) => {
 		await escogerBdd(req.params.equipo);
 
 		const dependientes = await Dependiente.deleteOne({ _id: req.params.id });
