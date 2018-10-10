@@ -64,7 +64,7 @@ module.exports = (app, escogerBdd) => {
 
 		const respuesta = await Dependiente.findOneAndUpdate(
 			{ _id: req.params.id },
-			{ nombre, apellidos, edad },
+			{ nombre_completo, dependencia, edad },
 			{ new: true }
 		).exec();
 
