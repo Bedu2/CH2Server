@@ -9,9 +9,9 @@ require('./models/Dependiente');
 // mongoose.connect(keys.mongoRed);
 
 const ponerCors = (req, res, next) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-	res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+	// res.header("Access-Control-Allow-Origin", "*");
+	// res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+	// res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 	next();
 }
 
@@ -26,7 +26,8 @@ const escogerBdd = async (req, res, next) => {
 
 const app = express();
 app.use(bodyParser.json());
-app.use(ponerCors);
+// app.use(ponerCors);
+app.options('*', cors());
 app.use(cors());
 
 require('./routes/usuariosRoutes')(app, escogerBdd, ponerCors);
