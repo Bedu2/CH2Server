@@ -17,9 +17,9 @@ const ponerCors = (req, res, next) => {
 
 const escogerBdd = async (req, res, next) => {
 	switch (req.params.equipo) {
-		case 'red': await mongoose.connect(keys.mongoRed);
-		case 'green': await mongoose.connect(keys.mongoGreen);
-		case 'orange': await mongoose.connect(keys.mongoOrange);
+		case 'red': await mongoose.connect(keys.mongoRed); break;
+		case 'green': await mongoose.connect(keys.mongoGreen); break;
+		case 'orange': await mongoose.connect(keys.mongoOrange); break;
 	}
 	next();
 };
