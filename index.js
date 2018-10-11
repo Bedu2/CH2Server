@@ -7,7 +7,7 @@ require('./models/Dependiente');
 
 // mongoose.connect(keys.mongoRed);
 
-const ponerCors = (req, res, next) => {
+const ponerCors = async (req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Credentials", "true");
 	res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
@@ -17,8 +17,8 @@ const ponerCors = (req, res, next) => {
       headers["Access-Control-Allow-Origin"] = "*";
       headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
       headers["Access-Control-Allow-Credentials"] = true;
-      headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
-      res.writeHead(200, headers);
+      headers["Access-Control-Allow-Headers"] = "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers";
+      await res.writeHead(200, headers);
 	}
 	next();
 }
