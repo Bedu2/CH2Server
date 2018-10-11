@@ -32,19 +32,18 @@ module.exports = (app, escogerBdd) => {
 	app.post('/api/dependientes/:equipo', escogerBdd, async (req, res) => {
 
 		const { nombre_completo, edad, _usuario, dependencia } = req.body;
-		res.send(_usuario);
+res.send(_usuario);
+		if (!nombre_completo) res.send('Falta el nombre completo.');
+		if (!dependencia) res.send('Falta dependencia.');
+		if (!edad) res.send('Falta la edad.');
+		if (!_usuario) res.send('Falta ID de usuario.');
 
-		// if (!nombre_completo) res.send('Falta el nombre completo.');
-		// if (!dependencia) res.send('Falta dependencia.');
-		// if (!edad) res.send('Falta la edad.');
-		// if (!_usuario) res.send('Falta ID de usuario.');
+		const dependiente = new Dependiente({
+			nombre_completo, edad, _usuario, dependencia
+		});
+		const respuesta = await dependiente.save();
 
-		// const dependiente = new Dependiente({
-		// 	nombre_completo, edad, _usuario, dependencia
-		// });
-		// const respuesta = await dependiente.save();
-
-		// res.send(respuesta);
+		res.send(respuesta);
 	});
 
 //=========================================================================
