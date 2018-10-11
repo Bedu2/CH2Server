@@ -31,8 +31,9 @@ module.exports = (app, escogerBdd) => {
 
 	app.post('/api/dependientes/:equipo', escogerBdd, async (req, res) => {
 
-		const { nombre_completo, edad, _usuario, dependencia } = req.body;
-		console.log('_usuario: ', _usuario);
+		const { nombre_completo, edad, dependencia } = req.body;
+		const usuario = req.body._usuario;
+		console.log('_usuario: ', usuario);
 
 		// if (!nombre_completo) res.send('Falta el nombre completo.');
 		// if (!dependencia) res.send('Falta dependencia.');
