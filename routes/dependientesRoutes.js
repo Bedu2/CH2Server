@@ -49,7 +49,7 @@ module.exports = (app, escogerBdd, ponerCors) => {
 //=========================================================================
 
 	app.post('/api/dependientes/:equipo/:id', escogerBdd, ponerCors, async (req, res) => {
-res.send(req.body);
+
 		const { nombre_completo, edad, _usuario, dependencia } = req.body;
 
 		if (!nombre_completo) res.send('Falta el nombre completo.');
