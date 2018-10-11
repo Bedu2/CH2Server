@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
@@ -26,6 +27,7 @@ const escogerBdd = async (req, res, next) => {
 const app = express();
 app.use(bodyParser.json());
 app.use(ponerCors);
+app.use(cors());
 
 require('./routes/usuariosRoutes')(app, escogerBdd, ponerCors);
 require('./routes/dependientesRoutes')(app, escogerBdd, ponerCors);
