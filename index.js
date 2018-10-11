@@ -28,7 +28,6 @@ const app = express();
 app.use(bodyParser.json());
 // app.use(ponerCors);
 app.use(cors());
-app.options('*', cors());
 
 require('./routes/usuariosRoutes')(app, escogerBdd, ponerCors);
 require('./routes/dependientesRoutes')(app, escogerBdd, ponerCors);
