@@ -63,7 +63,7 @@ module.exports = (app, escogerBdd, ponerCors) => {
 			{ new: true }
 		).exec();
 
-		res.send(respuesta);
+		res.send(req.body);
 	});
 
 //=========================================================================
