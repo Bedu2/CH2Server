@@ -3,9 +3,9 @@ const keys = require('../config/keys');
 
 const Dependiente = mongoose.model('dependientes');
 
-module.exports = (app, escogerBdd, ponerCors) => {
+module.exports = (app, escogerBdd) => {
 
-	app.get('/api/dependientes/:equipo', escogerBdd, ponerCors, async (req, res) => {
+	app.get('/api/dependientes/:equipo', escogerBdd, async (req, res) => {
 
 		const dependientes = await Dependiente.find({});
 		res.send(dependientes);
@@ -13,7 +13,7 @@ module.exports = (app, escogerBdd, ponerCors) => {
 
 //=========================================================================
 
-	app.get('/api/dependientes/:equipo/:id', escogerBdd, ponerCors, async (req, res) => {
+	app.get('/api/dependientes/:equipo/:id', escogerBdd, async (req, res) => {
 
 		const dependientes = await Dependiente.find({ _id: req.params.id });
 		res.send(dependientes);
@@ -21,7 +21,7 @@ module.exports = (app, escogerBdd, ponerCors) => {
 
 //=========================================================================
 
-	app.get('/api/dependientes_usuario/:equipo/:id', escogerBdd, ponerCors, async (req, res) => {
+	app.get('/api/dependientes_usuario/:equipo/:id', escogerBdd, async (req, res) => {
 
 		const dependientes = await Dependiente.find({ _usuario: req.params.id });
 		res.send(dependientes);
@@ -29,7 +29,7 @@ module.exports = (app, escogerBdd, ponerCors) => {
 
 //=========================================================================
 
-	app.post('/api/dependientes/:equipo', escogerBdd, ponerCors, async (req, res) => {
+	app.post('/api/dependientes/:equipo', escogerBdd, async (req, res) => {
 
 		const { nombre_completo, edad, _usuario, dependencia } = req.body;
 
@@ -48,7 +48,7 @@ module.exports = (app, escogerBdd, ponerCors) => {
 
 //=========================================================================
 
-	app.post('/api/dependientes/:equipo/:id', escogerBdd, ponerCors, async (req, res) => {
+	app.post('/api/dependientes/:equipo/:id', escogerBdd, async (req, res) => {
 
 		const { nombre_completo, edad, _usuario, dependencia } = req.body;
 
@@ -59,7 +59,7 @@ module.exports = (app, escogerBdd, ponerCors) => {
 
 		const respuesta = await Dependiente.findOneAndUpdate(
 			{ _id: req.params.id },
-			{ nombre_completo, dependencia, edad },
+			{ nombre_completo, dependencia, edad, _usuario },
 			{ new: true }
 		).exec();
 
@@ -68,7 +68,7 @@ module.exports = (app, escogerBdd, ponerCors) => {
 
 //=========================================================================
 
-	app.delete('/api/dependientes/:equipo/:id', escogerBdd, ponerCors, async (req, res) => {
+	app.delete('/api/dependientes/:equipo/:id', escogerBdd, async (req, res) => {
 
 		const dependientes = await Dependiente.deleteOne({ _id: req.params.id });
 		res.send(dependientes);
