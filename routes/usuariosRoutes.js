@@ -3,9 +3,9 @@ const keys = require('../config/keys');
 
 const Usuario = mongoose.model('usuarios');
 
-module.exports = (app, escogerBdd, ponerCors) => {
+module.exports = (app, escogerBdd) => {
 
-	app.get('/api/usuarios/:equipo', escogerBdd, ponerCors, async (req, res) => {
+	app.get('/api/usuarios/:equipo', escogerBdd, async (req, res) => {
 
 		const usuarios = await Usuario.find({});
 		res.send(usuarios);
@@ -13,7 +13,7 @@ module.exports = (app, escogerBdd, ponerCors) => {
 
 //=========================================================================
 
-	app.get('/api/usuarios/:equipo/:id', escogerBdd, ponerCors, async (req, res) => {
+	app.get('/api/usuarios/:equipo/:id', escogerBdd, async (req, res) => {
 
 		const usuarios = await Usuario.find({ _id: req.params.id });
 		res.send(usuarios);
@@ -21,7 +21,7 @@ module.exports = (app, escogerBdd, ponerCors) => {
 
 //=========================================================================
 
-	app.post('/api/usuarios/:equipo', escogerBdd, ponerCors, async (req, res) => {
+	app.post('/api/usuarios/:equipo', escogerBdd, async (req, res) => {
 
 		const { nombre, apellidos, edad } = req.body;
 		const { paterno, materno } = apellidos;
@@ -41,7 +41,7 @@ module.exports = (app, escogerBdd, ponerCors) => {
 
 //=========================================================================
 
-	app.post('/api/usuarios/:equipo/:id', escogerBdd, ponerCors, async (req, res) => {
+	app.post('/api/usuarios/:equipo/:id', escogerBdd, async (req, res) => {
 
 		const { nombre, apellidos, edad } = req.body;
 		const { paterno, materno } = apellidos;
@@ -62,7 +62,7 @@ module.exports = (app, escogerBdd, ponerCors) => {
 
 //=========================================================================
 
-	app.delete('/api/usuarios/:equipo/:id', escogerBdd, ponerCors, async (req, res) => {
+	app.delete('/api/usuarios/:equipo/:id', escogerBdd, async (req, res) => {
 
 		const usuarios = await Usuario.deleteOne({ _id: req.params.id });
 		res.send(usuarios);
