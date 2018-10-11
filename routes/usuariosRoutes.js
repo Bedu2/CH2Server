@@ -24,7 +24,7 @@ module.exports = (app, escogerBdd, ponerCors) => {
 	app.post('/api/usuarios/:equipo', escogerBdd, ponerCors, async (req, res) => {
 
 		const { nombre, apellidos, edad } = req.body;
-		res.send(req.body);
+		return res.send(req.body);
 		const { paterno, materno } = apellidos;
 
 		if (!nombre) res.send('Falta el nombre.');
