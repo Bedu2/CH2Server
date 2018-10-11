@@ -3,10 +3,9 @@ const keys = require('../config/keys');
 
 const Dependiente = mongoose.model('dependientes');
 
-module.exports = (app, escogerBdd) => {
+module.exports = (app, escogerBdd, ponerCors) => {
 
-	app.get('/api/dependientes/:equipo', async (req, res) => {
-		await escogerBdd(req.params.equipo);
+	app.get('/api/dependientes/:equipo', escogerBdd, ponerCors, async (req, res) => {
 
 		const dependientes = await Dependiente.find({});
 		res.send(dependientes);
@@ -14,8 +13,7 @@ module.exports = (app, escogerBdd) => {
 
 //=========================================================================
 
-	app.get('/api/dependientes/:equipo/:id', async (req, res) => {
-		await escogerBdd(req.params.equipo);
+	app.get('/api/dependientes/:equipo/:id', escogerBdd, ponerCors, async (req, res) => {
 
 		const dependientes = await Dependiente.find({ _id: req.params.id });
 		res.send(dependientes);
@@ -23,8 +21,7 @@ module.exports = (app, escogerBdd) => {
 
 //=========================================================================
 
-	app.get('/api/dependientes_usuario/:equipo/:id', async (req, res) => {
-		await escogerBdd(req.params.equipo);
+	app.get('/api/dependientes_usuario/:equipo/:id', escogerBdd, ponerCors, async (req, res) => {
 
 		const dependientes = await Dependiente.find({ _usuario: req.params.id });
 		res.send(dependientes);
@@ -32,8 +29,7 @@ module.exports = (app, escogerBdd) => {
 
 //=========================================================================
 
-	app.post('/api/dependientes/:equipo', async (req, res) => {
-		await escogerBdd(req.params.equipo);
+	app.post('/api/dependientes/:equipo', escogerBdd, ponerCors, async (req, res) => {
 
 		const { nombre_completo, edad, _usuario, dependencia } = req.body;
 
@@ -52,8 +48,7 @@ module.exports = (app, escogerBdd) => {
 
 //=========================================================================
 
-	app.post('/api/dependientes/:equipo/:id', async (req, res) => {
-		await escogerBdd(req.params.equipo);
+	app.post('/api/dependientes/:equipo/:id', escogerBdd, ponerCors, async (req, res) => {
 
 		const { nombre_completo, edad, _usuario, dependencia } = req.body;
 
@@ -73,8 +68,7 @@ module.exports = (app, escogerBdd) => {
 
 //=========================================================================
 
-	app.delete('/api/dependientes/:equipo/:id', async (req, res) => {
-		await escogerBdd(req.params.equipo);
+	app.delete('/api/dependientes/:equipo/:id', escogerBdd, ponerCors, async (req, res) => {
 
 		const dependientes = await Dependiente.deleteOne({ _id: req.params.id });
 		res.send(dependientes);

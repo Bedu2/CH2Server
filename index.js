@@ -7,25 +7,28 @@ require('./models/Dependiente');
 
 // mongoose.connect(keys.mongoRed);
 
-const app = express();
-app.use(bodyParser.json());
-app.use((req, res, next) => {
+const ponerCors = (req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header('Access-Control-Allow-Methods', 'get, post, delete');
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
-});
+}
 
-const escogerBdd = (equipo) => {
-	switch (equipo) {
-		case 'red': return mongoose.connect(keys.mongoRed);
-		case 'green': return mongoose.connect(keys.mongoGreen);
-		case 'orange': return mongoose.connect(keys.mongoOrange);
+const escogerBdd = async (req, res, next) => {
+	switch (req.params.equipo) {
+		case 'red': await mongoose.connect(keys.mongoRed);
+		case 'green': await mongoose.connect(keys.mongoGreen);
+		case 'orange': await mongoose.connect(keys.mongoOrange);
 	}
+	next();
 };
 
-require('./routes/usuariosRoutes')(app, escogerBdd);
-require('./routes/dependientesRoutes')(app, escogerBdd);
+const app = express();
+app.use(bodyParser.json());
+app.use(ponerCors);
+
+require('./routes/usuariosRoutes')(app, escogerBdd, ponerCors);
+require('./routes/dependientesRoutes')(app, escogerBdd, ponerCors);
 
 
 const PORT = process.env.PORT || 5000;
